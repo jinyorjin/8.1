@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, TextArea } from "semantic-ui-react";
 import Addimage from "./Addimage";
-import { db } from "./firebase"; // firebase.js에서 가져오기
+import { db } from "./firebase";
 import { collection, addDoc } from "firebase/firestore";
 import "./App.css";
 
@@ -12,7 +12,6 @@ const QuestionArticle = ({ postType }) => {
   const [abstract, setAbstract] = useState("");
   const [articleText, setArticleText] = useState("");
 
-  // Firestore에 질문 추가 함수
   const handleAddQuestion = async () => {
     try {
       await addDoc(collection(db, "questions"), {
@@ -27,12 +26,11 @@ const QuestionArticle = ({ postType }) => {
     }
   };
 
-  // Form 제출 핸들러
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (postType === "question") {
-      handleAddQuestion(); // Firestore에 질문 저장
+      handleAddQuestion();
     } else if (postType === "article") {
       console.log({
         title,
@@ -40,7 +38,6 @@ const QuestionArticle = ({ postType }) => {
         articleText,
         tags,
       });
-      // Firestore에 기사 저장 로직 추가
     }
   };
 
